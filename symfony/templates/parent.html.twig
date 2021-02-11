@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <title> {% block Title %}Mon projet symfony{% endblock %}</title>
+    <link rel="stylesheet" href="{{asset ('css/style.css')}}">
+
+</head>
+
+<body>
+    <header>
+        <nav>
+            <a href="{{path("index")}}">accueil</a>
+            <a href="{{path("galerie")}}">galerie</a>
+            <a href="{{path("contact")}}">contact</a>
+        </nav>
+    </header>
+    <main>
+
+        <section>   
+            {% block image %}
+            <img src="{{asset ('images/photo1.jpg')}}" alt="">
+            {% endblock %}
+
+            {% block titre1 %}
+            <h1>je suis un sith </h1>
+            {% endblock %}
+
+            {% block content %}
+             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis, similique?</p>
+            {% endblock %}
+           
+         
+            
+        </section>
+    </main>
+    <footer>
+    {% block footer %}
+      <p>tous droits réservés</p>
+    {% endblock %}
+      
+    </footer>
+    <script src="{{asset ('js/script.js')}}"></script>
+</body>
+
+</html>

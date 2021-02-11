@@ -1,0 +1,32 @@
+{% extends 'parent.html.twig' %}
+
+{% block titre1 %}
+<h1>contact</h1>
+{% endblock %}
+
+{% block image %}
+<img src="{{asset ('images/photo2.jpg')}}" alt="">
+{% endblock %}
+
+{% block content %}
+<h2> contact </h2>
+<form action="">
+
+    <div>
+        <label for="email">ton adresse email</label>
+        <input type="email" id ='email'>
+    </div>
+    <div>
+        <label for="message">ton  message</label>
+        <textarea name="message" id="message" cols="30" rows="10"></textarea>
+    </div>
+    <button type="submit">envoyer le message</button>
+</form>
+{% endblock %}
+
+
+
+
+{% block footer %}
+<p>je ne suis pas ton pere</p>
+{% endblock %}
