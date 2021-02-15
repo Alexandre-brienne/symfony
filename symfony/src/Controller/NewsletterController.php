@@ -29,11 +29,26 @@ class NewsletterController extends AbstractController
     #[Route('/new', name: 'newsletter_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
     {
-        $newsletter = new Newsletter();
+        // $request est fourni par symfony
+        // $request permet de récupérer les infos de formulaire
+        $newsletter = new Newsletter(); // code créé avec le make:entity
+        // $newsletter est un objet qui va contenir les infos de formulaire
+      
+           // $newsletter->setNom("nom prérempli");
+        // attention : le pré remplisage doit se faire avant createForm
         $form = $this->createForm(NewsletterType::class, $newsletter);
+         // connecte le formulaire avec les infos reçues du navigateur
         $form->handleRequest($request);
-
+        //si le formulaire est envoyé et les infos sont correctes
+      
         if ($form->isSubmitted() && $form->isValid()) {
+                //alors on traite le formulaire 
+
+             // ici on peut compléter les infos manquantes
+            $newsletter->setDateInscription(new \DateTime());
+
+
+            //on envoie les infos en base de données
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($newsletter);
             $entityManager->flush();

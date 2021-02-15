@@ -10,18 +10,9 @@
 
 {% block content %}
 <h2> contact </h2>
-<form action="">
+{{ include('contact/_form.html.twig') }}
 
-    <div>
-        <label for="email">ton adresse email</label>
-        <input type="email" id ='email'>
-    </div>
-    <div>
-        <label for="message">ton  message</label>
-        <textarea name="message" id="message" cols="30" rows="10"></textarea>
-    </div>
-    <button type="submit">envoyer le message</button>
-</form>
+ <div class ={{class}}><p>{{messageConfirmation}}</p></div>
 {% endblock %}
 
 
