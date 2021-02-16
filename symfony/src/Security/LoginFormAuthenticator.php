@@ -30,13 +30,24 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     private $urlGenerator;
     private $csrfTokenManager;
     private $passwordEncoder;
+    private $security;
 
-    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder)
-    {
+   
+
+    public function __construct(Security $security,EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder)
+    {   
+
+        //injection de dependances 
+        //on ne pas creer les objets,c'est symfonu qui creer les objets 
+        //et nous les fournit en parametre
+
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $passwordEncoder;
+        // Avoid calling getUser() in the constructor: auth may not
+        // be complete yet. Instead, store the entire Security object.
+        $this->security = $security;
     }
 
     public function supports(Request $request)
@@ -95,8 +106,26 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }
+        // IL FAUT RECUPERER L'UTILISATEUR CONNECTE
+        // ET SUIVANT LE ROLE DE L'UTILISATEUR, ON LE REDIRIGE VERS L'ESPACE ADMIN OU MEMBRE
+        // https://symfony.com/doc/current/security.html#b-fetching-the-user-from-a-service
+        
+        
+        // GOOD
+        $nomRouteRedirection = "index";
+        if ($this->security->isGranted("ROLE_ADMIN")) {
+            // redirection vers la page /admin
+            $nomRouteRedirection = "admin";
+        }
+        elseif ($this->security->isGranted("ROLE_MEMBRE")) {
+            // redirection vers la page /admin
+            $nomRouteRedirection = "membre";
+        }
+
+
+
         //todo changer la redirection vers ue apge espace membre
-        return new RedirectResponse($this->urlGenerator->generate('index'));
+        return new RedirectResponse($this->urlGenerator->generate($nomRouteRedirection));
         // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 

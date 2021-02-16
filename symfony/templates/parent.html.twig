@@ -19,6 +19,7 @@
             <a href="{{path("contact")}}">contact</a>
            
             {% if app.user %}  
+                <a href="{{ path('admin') }}">admin</a>
                 <a href="{{path("annonce")}}">annonces</a>
                 <span class="mb-3">
                 Bienvenue : {{ app.user.username }}, <a href="{{ path('app_logout') }}">Se déconnecter</a>
