@@ -8,8 +8,11 @@ use App\Form\NewsletterType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-// ne pas oublier les ligne usa
+// ne pas oublier les ligne use
 use Symfony\Component\HttpFoundation\Request;
+
+use App\Repository\AnnonceRepository;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SithController extends AbstractController
 {
     #[Route('/', name: 'index', methods: ['GET', 'POST'])]
@@ -74,5 +77,33 @@ class SithController extends AbstractController
             'messageConfirmation'   => $messageConfirmation,
             "class" => $class,
         ]);
+
+
     }
+
+    #[Route('/annonces', name: 'annonce',  methods: ['GET'])]
+    public function annonces(AnnonceRepository $annonceRepository): Response
+    {
+        return $this->render('annonce/index.html.twig', [
+            'controller_name' => 'SiteController',
+            'annonces' => $annonceRepository->findAll()
+        ]);
+    }
+
+    #[Route('/login', name: 'login')]
+    public function login(AuthenticationUtils $authenticationUtils): Response
+    {
+        // if ($this->getUser()) {
+        //     return $this->redirectToRoute('target_path');
+        // }
+
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+    }
+
+    
 }

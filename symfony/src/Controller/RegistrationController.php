@@ -34,6 +34,7 @@ class RegistrationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
+        
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
@@ -41,7 +42,7 @@ class RegistrationController extends AbstractController
                 )
             );
             // compléter les infos manquantes
-            
+            $user->setRoles(["ROLE_USER"]);
             $user->setDateCreation(new \DateTime(), new DateTimeZone('Europe/paris'));
 
       

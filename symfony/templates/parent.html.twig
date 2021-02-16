@@ -17,6 +17,10 @@
             <a href="{{path("index")}}">accueil</a>
             <a href="{{path("galerie")}}">galerie</a>
             <a href="{{path("contact")}}">contact</a>
+            {% if is_granted('ROLE_USER') == TRUE %}
+            <a href="{{path("annonce")}}">annonces</a>
+            {% endif %}
+        
         </nav>
     </header>
     <main>
