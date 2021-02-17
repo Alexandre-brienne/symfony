@@ -63,6 +63,8 @@ class AnnonceController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            //la mise a jour est déclencée automatiquement 
+            //car symfony sait déja que l'objet $annonce est associée a une ligne SQL
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('annonce_index');
