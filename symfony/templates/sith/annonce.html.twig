@@ -8,8 +8,9 @@
         
                 <p>{{ annonce.titre }}</p>
                 <p>{{ annonce.contenu }}</p>
+                <p>publié par {{annonce.user.username}}</p>
                 <p>{{ annonce.image }}</p>
-                <p>{{ annonce.datePublication ? annonce.datePublication|date('d m Y H:i:s') : '' }}</p>
+                <p>{{ annonce.datePublication ? annonce.datePublication|date('d m Y H:i') : '' }}</p>
 
 {% endblock %}
 

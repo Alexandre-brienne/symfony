@@ -13,5 +13,44 @@
     <p> bienvenue petit dans ton espace pour creer des annonce ;) </p>
     <a href="{{ path('membre_new') }}">Creer une annonce</a>
 
+
+    <h2>liste de vos annonces</h2>
+ <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>slug</th>
+                <th>Titre</th>
+                <th>Contenu</th>
+                <th>Image</th>
+                <th>DatePublication</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for annonce in app.user.annonces %}
+            <tr>
+                <td>{{ annonce.id }}</td>
+                <td>{{ annonce.slug }}</td>
+                <td>{{ annonce.titre }}</td>
+                <td>{{ annonce.contenu }}</td>
+                {% if annonce.image %}
+                <td><img src="{{ asset('uploads/' ~ annonce.image) }}" class="img-fluid"></td>
+                {% else %}
+                <td>pas d'images :'(</td>
+                {% endif %}
+                <td>{{ annonce.datePublication ? annonce.datePublication|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('membre_show', {'id': annonce.id}) }}">show</a>
+                    
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 </div>
 {% endblock %}
