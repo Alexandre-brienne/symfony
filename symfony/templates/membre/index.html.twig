@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'membre.html.twig' %}
 
 {% block title %}Hello MembreController!{% endblock %}
 
@@ -9,12 +9,9 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Bonjour {{ app.user.username }}! 😁</h1>
+    <p> bienvenue petit dans ton espace pour creer des annonce ;) </p>
+    <a href="{{ path('membre_new') }}">Creer une annonce</a>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/laragon/www/symfony/symfony/src/Controller/MembreController.php'|file_link(0) }}">src/Controller/MembreController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/laragon/www/symfony/symfony/templates/membre/index.html.twig'|file_link(0) }}">templates/membre/index.html.twig</a></code></li>
-    </ul>
 </div>
 {% endblock %}

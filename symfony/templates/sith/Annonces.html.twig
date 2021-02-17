@@ -5,7 +5,20 @@
 {% endblock %}
 
 {% block content %}
-<p>je suis un galerie</p>
+    <table class="table">
+        {% for annonce in annonces %}
+           
+                <p>{{ annonce.titre }}</p>
+                <p>{{ annonce.contenu }}</p>
+                <p>{{ annonce.image }}</p>
+                <p>{{ annonce.datePublication ? annonce.datePublication|date('d m Y H:i:s') : '' }}</p>
+                 <a href="{{ path('annonce', {'slug': annonce.slug, 'id':annonce.id}) }}">show</a>
+        {% else %}
+            <p>
+             no records found
+            </p>
+        {% endfor %}
+        </tbody>
 {% endblock %}
 
 {% block image %}

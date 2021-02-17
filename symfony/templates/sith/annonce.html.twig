@@ -1,0 +1,15 @@
+{% extends 'parent.html.twig' %}
+{% block Title %}page annonce{% endblock %}
+{% block titre1 %}
+<h1>une seul annonce</h1>
+{% endblock %}
+
+{% block content %}
+        
+                <p>{{ annonce.titre }}</p>
+                <p>{{ annonce.contenu }}</p>
+                <p>{{ annonce.image }}</p>
+                <p>{{ annonce.datePublication ? annonce.datePublication|date('d m Y H:i:s') : '' }}</p>
+
+{% endblock %}
+

@@ -20,7 +20,7 @@
            
             {% if app.user %}  
                 <a href="{{ path('admin') }}">admin</a>
-                <a href="{{path("annonce")}}">annonces</a>
+                {# <a href="{{path("annonces")}}">annonces</a> #}
                 <span class="mb-3">
                 Bienvenue : {{ app.user.username }}, <a href="{{ path('app_logout') }}">Se déconnecter</a>
                 </span>

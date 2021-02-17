@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Espace Membre{% endblock %}
+
+{% block body %}
+    <h1>espace membre</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button class="btn btn-primary">{{ button_label|default('Publier votre annonce') }}</button>
+        <div>{{ messageConfirmation }}</div>
+    {{ form_end(form) }}
+
+{% endblock %}

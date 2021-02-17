@@ -10,7 +10,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 // ne pas oublier les ligne use
 use Symfony\Component\HttpFoundation\Request;
-
+use App\Entity\Annonce;
+use App\Form\AnnonceType;
 use App\Repository\AnnonceRepository;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SithController extends AbstractController
@@ -81,12 +82,23 @@ class SithController extends AbstractController
 
     }
 
-    #[Route('/annonces', name: 'annonce',  methods: ['GET'])]
+    #[Route('/annonces', name: 'annonces',  methods: ['GET'])]
     public function annonces(AnnonceRepository $annonceRepository): Response
-    {
-        return $this->render('annonce/index.html.twig', [
+    {   
+        // https://symfony.com/doc/current/doctrine.html#fetching-objects-from-the-database
+        // $annonces = $annonceRepository->findAll();   // TROP BASIQUE CAR TRIE PAR id CROISSANT
+        $annonces = $annonceRepository->findBy([],["datePublication" => "DESC"]);
+        return $this->render('sith/Annonces.html.twig', [
             'controller_name' => 'SiteController',
-            'annonces' => $annonceRepository->findAll()
+            'annonces' => $annonces
+        ]);
+    }
+
+    #[Route('/annonce/{slug}/{id}', name: 'annonce', methods: ['GET'])]
+    public function show(Annonce $annonce): Response
+    {
+        return $this->render('sith/annonce.html.twig', [
+            'annonce' => $annonce,
         ]);
     }
 

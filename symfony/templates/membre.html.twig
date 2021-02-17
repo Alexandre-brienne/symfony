@@ -21,10 +21,9 @@
 	</head>
 
 	<body>
-		<nav>
-			<a href="{{ path('membre_index') }}">annonces</a>
-			<a href="{{ path('categorie_index') }}">catégories</a>
-			<a href="{{ path('index') }}">accueil</a>
+		<nav>	
+            <a href="{{ path('index') }}">accueil</a>
+            <a href="{{ path('membre_new') }}">Creer une annonce</a>
 			<a href="{{ path('app_logout') }}">déconnexion</a>
 		</nav>
 		{% block body %}{% endblock %}
