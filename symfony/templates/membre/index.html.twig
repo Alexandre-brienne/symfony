@@ -21,6 +21,7 @@
                 <th>Id</th>
                 <th>slug</th>
                 <th>Titre</th>
+                <th>categories</th>
                 <th>Contenu</th>
                 <th>Image</th>
                 <th>DatePublication</th>
@@ -33,6 +34,14 @@
                 <td>{{ annonce.id }}</td>
                 <td>{{ annonce.slug }}</td>
                 <td>{{ annonce.titre }}</td>
+                <td>
+                {% if annonce.categories|length > 0 %}
+                    {% for categorie in annonce.categories %}
+                    <p>{{categorie.label}}</p>
+                    {% endfor %}
+                {% endif %}
+
+                </td>
                 <td>{{ annonce.contenu }}</td>
                 {% if annonce.image %}
                 <td><img src="{{ asset('uploads/' ~ annonce.image) }}" class="img-fluid"></td>

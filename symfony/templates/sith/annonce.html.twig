@@ -8,6 +8,11 @@
         
                 <p>{{ annonce.titre }}</p>
                 <p>{{ annonce.contenu }}</p>
+                {% if annonce.categories|length > 0 %}
+                    {% for categorie in annonce.categories %}
+                    <p>{{categorie.label}}</p>
+                    {% endfor %}
+                {% endif %}
                 <p>publié par {{annonce.user.username}}</p>
                 <p>{{ annonce.image }}</p>
                 <p>{{ annonce.datePublication ? annonce.datePublication|date('d m Y H:i') : '' }}</p>

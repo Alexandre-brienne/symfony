@@ -8,12 +8,26 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints\Image;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Categorie;
+
 class AnnonceType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('titre')
+            ->add('categories',EntityType::class, [
+                 // looks for choices from this entity
+                 'class' => Categorie::class,
+            
+                 // uses the User.username property as the visible option string
+                 'choice_label' => 'label',
+             
+                 // used to render a select box, check boxes or radios
+                 'multiple' => true,
+                 'expanded' => true,
+            ])
             ->add('contenu')
             ->add('image',FileType::class, [
                 'label' => 'choisissez une photo à uploader',

@@ -51,7 +51,7 @@ class Annonce
     private $user;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Categorie::class, inversedBy="annonces")
+     * @ORM\ManyToMany(targetEntity=Categorie::class, inversedBy="annonces", fetch="EAGER")
      */
     private $categories;
 

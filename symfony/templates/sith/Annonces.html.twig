@@ -10,6 +10,11 @@
            
                 <p>{{ annonce.titre }}</p>
                 <p>{{ annonce.contenu }}</p>
+                     {% if annonce.categories|length > 0 %}
+                    {% for categorie in annonce.categories %}
+                    <p>{{categorie.label}}</p>
+                    {% endfor %}
+                {% endif %}
                 <p>publié par {{annonce.user.username}}</p>
                 <img src="{{ asset('uploads/' ~ annonce.image) }}" class="img-fluid">
                 <p>{{ annonce.datePublication ? annonce.datePublication|date('d m Y H:i') : '' }}</p>
