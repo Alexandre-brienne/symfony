@@ -117,5 +117,31 @@ class SithController extends AbstractController
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
+    #[Route('/recherche', name: 'recherche')]
+    public function recherche(Request $request,AnnonceRepository $annonceRepository): Response
+    {
+        //recuperer le mot recherché 
+        // et lancé une requete sql pour chercher les annonces 
+        //dont le tite contient le mot clé 
+        $mot = $request->get('mot');
+        dump($mot);
+        if (!empty($mot)){
+
+                // on va lancer la recherche sur le mot
+            // recherche exacte
+            // $annonces = $annonceRepository->findBy([
+            //     "titre" => $mot,
+            // ], [ "datePublication" => "DESC"]);
+
+            // si on veut que le titre puisse avoir un texte en plus que le mot cherché
+            // => SQL LIKE 
+            // https://sql.sh/cours/where/like
+            $annonces = $annonceRepository->chercherMot($mot);
+        }
+
+        return $this->render('sith/recherche.html.twig', [
+            'annonces' => $annonces ?? [] ,
+        ]);
+    }
     
 }

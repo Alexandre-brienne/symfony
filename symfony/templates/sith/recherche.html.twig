@@ -1,0 +1,45 @@
+{% extends 'parent.html.twig' %}
+{% block Title %}galerie{% endblock %}
+{% block titre1 %}
+<h1>recherche</h1>
+{% endblock %}
+
+{% block content %}
+  <div class="annonces">
+  <section class="container">
+    <h1>Chercher des Annonces</h1>
+    <form action="" method="GET">
+        <label>
+            <strong>entrez un mot clé</strong>
+            <input type="text" name="mot" required>  
+            <button type="submit">envoyer la recherche</button>  
+        </label>
+    </form>
+</section>
+        {% for annonce in annonces %}
+            <article>
+                <h3><a href="{{ path('annonce', {'slug': annonce.slug, 'id': annonce.id}) }}">{{ annonce.titre }}</a></h3>
+                <div>publié par {{ annonce.user.username }}</div>
+
+                {% if annonce.categories|length > 0 %}
+                <div>classé dans :</div>
+                <ul>
+                    {% for categorie in annonce.categories %}
+                        <li>{{ categorie.label }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                
+                <p>{{ annonce.contenu }}</p>
+                    {% if annonce.image %}
+                        <div><img src="{{ asset('uploads/' ~ annonce.image) }}" class="img-fluid"></div>
+                    {% endif %}
+                <div>{{ annonce.datePublication ? annonce.datePublication|date('d/m/Y à H:i') : '' }}</div>
+            </article>
+        {% else %}
+            <article>
+                <div>aucune annonce n'a été trouvée</div>
+            </article>
+        {% endfor %}
+{% endblock %}
+

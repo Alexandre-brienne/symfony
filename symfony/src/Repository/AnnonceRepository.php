@@ -19,6 +19,27 @@ class AnnonceRepository extends ServiceEntityRepository
         parent::__construct($registry, Annonce::class);
     }
 
+
+    //on se creer une méthode a nous pour effectuer une requete spéciale
+    //
+    public function cherchermot($mot)
+    
+    {   
+    
+        $entityManager = $this->getEntityManager();
+        //attention requete en DQL (doctrine query language)
+        $query = $entityManager->createQuery(
+            'SELECT a
+            FROM App\Entity\Annonce a
+            WHERE a.titre like :titre
+            ORDER BY a.datePublication ASC'
+        )->setParameter('titre', "%$mot%");
+        // on rajoute les % pour chercher un titre qui contient le mot
+        // https://sql.sh/cours/where/like
+
+        return $query->getResult();
+
+    }
     // /**
     //  * @return Annonce[] Returns an array of Annonce objects
     //  */
