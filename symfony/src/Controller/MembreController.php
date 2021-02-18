@@ -179,7 +179,7 @@ class MembreController extends AbstractController
                     return $this->redirectToRoute('membre_index');
                 }
 
-                return $this->render('annonce/edit.html.twig', [
+                return $this->render('membre/edit.html.twig', [
                     'annonce' => $annonce,
                     'form' => $form->createView(),
                 ]);
