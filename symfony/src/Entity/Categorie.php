@@ -82,7 +82,7 @@ class Categorie
             $this->annonces[] = $annonce;
             $annonce->addCategory($this);
         }
-
+        
         return $this;
     }
 
